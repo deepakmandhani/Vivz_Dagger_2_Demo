@@ -10,13 +10,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import javax.inject.Inject;
+
 import slidenerd.vivz.d2demo.extras.Keys;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class FragmentA extends Fragment implements View.OnClickListener {
-    private SharedPreferences mPreferences;
+    @Inject
+    SharedPreferences mPreferences;
     private EditText mInputText;
     private Button mBtnStore;
 
@@ -26,7 +29,7 @@ public class FragmentA extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        ((MyApplication)getActivity().getApplication()).getPreferenceComponent().inject(this);
     }
 
     @Override
